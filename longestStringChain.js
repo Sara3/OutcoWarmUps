@@ -10,7 +10,10 @@ with k >= 1, where word_1 is a predecessor of word_2, word_2 is a predecessor of
 
 Return the longest possible length of a word chain with words chosen from the given list of words.
 
- 
+
+
+[a,c,d]
+[ab, cd]
 
 Example 1:
 
@@ -19,6 +22,9 @@ Output: 4
 Explanation: one of the longest word chain is "a","ba","bda","bdca".
 
  
+a -> ba -> bca->bdca
+bca -> ba
+
 
 Note:
 
@@ -28,5 +34,47 @@ Note:
 
 */
 
+/* approach 1: sort the array create a table 
+key = the word
+value = length of the chains it forms 
 
-console.log("sdfsf")
+delete one character and check if the newly formed word exists in the table
+
+*/
+
+var longestStrChain = function(words) {
+let dp = {}
+  words.sort((a,b)=>a.length - b.length)
+  
+  for(let i = 0; i < words.length; i++){
+    dp[words[i]]  = 1
+  }
+  
+  for(let i = 0; i < words.length; i++){
+    let word = words[i]
+    for(let j = 0; j<word.length; j++){
+      let last = word.substring(0, j) + word.substring(j + 1, word.length)
+      // if last exists in my dp
+      // max (dp[last]+1, dp[word])
+      if(dp[last]){
+        dp[word] = Math.max(dp[last]+1, dp[word])
+      }
+    }
+  }
+  
+  let max = 0
+  for(let k in dp){
+   // console.log(dp[k])
+    if (max < dp[k]){
+      max = dp[k]
+    }
+  }
+  
+  return max
+};
+
+
+
+
+
+
