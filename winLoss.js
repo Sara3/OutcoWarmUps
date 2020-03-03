@@ -33,8 +33,8 @@ input: n
 
 
 a = []
-for i in range(1, 2 ** n):
-    a.append(format(i, '0' + str(n) + 'b').replace('1', 'X').replace('0', 'O'))
+for i in range(0, 2 ** n):
+    a.append(f'{i:0{n}b}'.translate(str.maketrans('01', 'OX')))
 print(a)
 
 */
