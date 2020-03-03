@@ -7,3 +7,34 @@
 
 // Example input 2: 2
 // output: []
+
+
+function winLoss(n){
+  let result = new Set()
+  function helper(str){
+    if(str.length == n){
+      return result.add(str)
+    }else {
+      helper(str+"X")
+      helper(str + "O")
+    }
+  }
+  helper("")
+  return Array.from(result)
+}
+console.log(winLoss(4))
+
+
+
+
+/*
+ Python solution 
+input: n
+
+
+a = []
+for i in range(1, 2 ** n):
+    a.append(format(i, '0' + str(n) + 'b').replace('1', 'X').replace('0', 'O'))
+print(a)
+
+*/
