@@ -32,7 +32,7 @@ function trappingRainWater(arr){
       res += minWall - arr[i]
     }
   }  
-  console.log(res)
+  return res
 }
 
 trappingRainWater([3,0,2,0,4])
