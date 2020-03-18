@@ -21,31 +21,33 @@
 // findMedian() -> 2
 
 
-/**
- * initialize your data structure here.
- */
-var MedianFinder = function() {
-    
+var MedianFinder = function () {
+ this.arr = []
 };
 
-/** 
- * @param {number} num
- * @return {void}
- */
-MedianFinder.prototype.addNum = function(num) {
-    
+// /** 
+//  * @param {number} num
+//  * @return {void}
+//  */
+MedianFinder.prototype.addNum = function (num) {  
+  this.arr.push(num)
 };
 
 /**
- * @return {number}
+
  */
-MedianFinder.prototype.findMedian = function() {
-    
+MedianFinder.prototype.findMedian = function () {
+  // sort 
+  this.arr.sort((a, b) => a - b)
+  // ever or odd 
+  let size = this.arr.length
+  return (size & 1 ? this.arr[size / 2] : (this.arr[size / 2 - 1] + this.arr[size / 2]) * 0.5);
 };
 
-/** 
- * Your MedianFinder object will be instantiated and called as such:
- * var obj = new MedianFinder()
- * obj.addNum(num)
- * var param_2 = obj.findMedian()
- */
+var ob = new MedianFinder()
+ob.addNum(10)
+ob.addNum(111)
+ob.addNum(11)
+ob.addNum(12)
+
+console.log(ob.findMedian())
