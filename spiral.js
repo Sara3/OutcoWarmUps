@@ -29,3 +29,54 @@ Resources:
 
 Spiral Matrix
 */
+
+
+function matrix_spiral(n){
+  let mat = []
+  for(let i =0; i < n; i++){
+    mat.push([])
+  }
+
+  
+  let c = 1
+  
+  let minr = 0
+  let minc = 0
+  let maxr = n - 1
+  let maxc = n - 1
+  while(minr <= maxr && minc<=maxc) {
+    // top
+    for (let i = minc; i <= maxc; i++){
+      mat[minr][i] = c
+      c++
+    }
+    minr++
+    
+    // right
+    for (let i = minr; i <= maxr; i++) {
+      mat[i][maxc] = c
+      c++
+    }
+    maxc--
+    
+    // bottom 
+    for (let i = maxc; i >= minc; i--){
+      mat[maxr][i] = c
+      c++
+    }
+    maxr--
+    
+    // left
+    for (let i = maxr; i >= minr; i--){
+      mat[i][minc] = c
+      c++
+    }
+    minc++
+  }
+  
+  return mat
+  
+}
+
+console.log(matrix_spiral(4))
+console.log(matrix_spiral(10))
