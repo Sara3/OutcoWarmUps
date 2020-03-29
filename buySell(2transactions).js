@@ -25,4 +25,41 @@ Input: [7,6,4,3,1]
 Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
 
+
+https://www.geeksforgeeks.org/maximum-profit-by-buying-and-selling-a-share-at-most-k-times/?ref=rp
+
 */
+
+
+
+function buySell(arr, k){
+
+  let prof = []
+  console.log(arr)
+  for(let i =0; i < arr.length; i++){
+    prof.push(0)
+  }
+
+  for(let j = 0; j < k; j++){
+    let min = arr[0]
+    let max = 0
+    for(let i = 1; i < arr.length; i++){
+      min = Math.min(min, arr[i] - prof[i]) 
+      /*Math.min compares two values and selects the more minimum value of the two.
+So before the Math.min statement -
+min has x value
+and arr[i] - prof[i] has y value.
+Math.min is comparing x and y. and it’s also setting min equal to the lesser value of x and y.
+*/
+      max = Math.max(max, arr[i]-min) 
+      prof[i] = max
+    }
+    console.log(prof)
+}
+  return prof.pop()
+}
+
+// [0,3,3, 5]
+//[0, 3,3, 7]
+
+console.log(buySell([3, 3, 5, 0, 0, 3, 1, 4], 2))
