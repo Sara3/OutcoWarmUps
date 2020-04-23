@@ -116,3 +116,25 @@ function buySell(arr, k){
 console.log(buySell([3, 3, 5, 0, 0, 3, 1, 4], 2))
 
 //6 
+
+
+// Python Implementation with optimization for when k >= n / 2
+// class Solution:
+//     def maxProfit(self, k: int, prices: List[int]) -> int:
+//         if not prices:
+//             return 0
+        
+//         n = len(prices)
+//         if k >= n / 2:
+//             max_profit = 0
+//             for i in range(1,n):
+//                 max_profit += max(prices[i]-prices[i-1],0)
+//             return max_profit
+    
+//         dp = [0] * n
+//         for t in range(k):
+//             mincost = prices[0]
+//             for d in range(1, n):
+//                 mincost = min(mincost, prices[d] - dp[d])
+//                 dp[d] = max(dp[d-1], prices[d] - mincost)
+//         return dp[n - 1]
