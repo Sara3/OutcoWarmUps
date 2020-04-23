@@ -83,16 +83,9 @@ def max_profits(price_intervals, k=1) -> int:
 
 def stock_profits(prices, k=1):
     """
-    Reduce the problem to maximizing subarray sum.
-    Since we only care about net profit, we can look at the daily changes in prices,
-    and find the "k" largest-sum subarrays (non-overlapping).
-
-    Furthermore, since we will never sell on a day before we reach peak price and will
-    never buy on a day before we reach bottom price, we can sum same sign differences
-    and look at an array of alternating positive and negative integers.
-
-    For example:
-        [1, 5, 9, 7, 2, 6] -diffs-> [4, 4, -2, -5, 4] -sums-> [8, -7, 4]
+    This is the driver routine to get the valley, peaks from the input
+    and feed it to the max_profits function. See its description for
+    more info.
     """
     n = len(prices)
     if n < 2 or k < 1:
@@ -117,14 +110,14 @@ def stock_profits(prices, k=1):
 
 
 def main():
-    days = 10
-    k = 9
+    days = 20
+    k = 4
     # example = [1, 2, 3, 4, 10, 20, 0, 1, 20, 19, 4]
     seed(20200423)
     example = [randint(0, 20) for _ in range(days)]
     print("Example prices:\t", example)
     profits = stock_profits(example, k)
-    print(f"Best {k} transactions:\t", profits)
+    print(f"Best (at most) {k} transactions:\t", profits)
 
 
 if __name__ == "__main__":
