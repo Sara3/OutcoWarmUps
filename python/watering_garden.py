@@ -31,12 +31,18 @@ def min_taps(n: int, ranges: [int]) -> int:
         high = min(n, i + r)
         table[low] = max(table[low], high)
 
+    # Count number of "hops" it takes to reach the end of the garden
+    # Each hop represents a choice of a sprinkler that can water the
+    # starting point and extends furthest to the right.
     bound = idx = count = 0
     while bound < n:
         count += 1
+        # Search for furthest possible range for the next sprinkler choice
         for j in range(idx, bound + 1):
             bound = max(bound, table[j])
             idx += 1
+        # If we haven't been able to extend our boundary, we do not have a sprinkler
+        # choice that can water our current position plus some more ahead.
         if idx > bound:
             return -1
 
