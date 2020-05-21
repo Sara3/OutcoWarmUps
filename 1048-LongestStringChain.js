@@ -60,3 +60,48 @@ var longestStrChain = function(words) {
     
     return max
 };
+
+
+// Python solutions
+
+// (1) Bottom up Dynamic Programming
+/*
+class Solution:
+    def longestStrChain(self, words: List[str]) -> int:
+        longestchain = defaultdict(lambda: 1)
+        words = set(words)
+        ans = 1
+        for word in sorted(words, key=lambda e: len(e), reverse=True):
+            for i in range(len(word)):
+                word2 = word[:i] + word[i + 1:]
+                if word2 in words:
+                    longestchain[word2] = max(longestchain[word2], 1 + longestchain[word])
+                    ans = max(ans, longestchain[word2])
+        return ans
+*/        
+        
+
+// (2) Top-down recursive solution with memoization 
+/*
+class Solution:
+    def longestStrChain(self, words: List[str]) -> int:
+        words.sort(key=lambda e: len(e))
+        n = len(words)
+        ans = 1
+        
+        @functools.lru_cache(None)
+        def helper(start):
+            nonlocal ans
+            if start == n - 1:
+                return 1
+            res = 1
+            for i in range(start + 1, n):
+                subres = helper(i)
+                if len(words[i]) - len(words[start])  == 1:
+                    if words[start] in set([words[i][:k] + words[i][k+1:] for k in range(len(words[i]))]):
+                        res = max(res, 1 + subres)
+            ans = max(res, ans, subres)
+            return res
+        helper(0)
+        return ans
+*/
