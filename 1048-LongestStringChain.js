@@ -96,11 +96,13 @@ class Solution:
                 return 1
             res = 1
             for i in range(start + 1, n):
-                subres = helper(i)
                 if len(words[i]) - len(words[start])  == 1:
                     if words[start] in set([words[i][:k] + words[i][k+1:] for k in range(len(words[i]))]):
-                        res = max(res, 1 + subres)
-            ans = max(res, ans, subres)
+                        res = max(res, 1 + helper(i))
+                elif len(words[i]) - len(words[start]) > 1:
+                    break
+            ans = max(res, ans)
+            helper(start + 1)
             return res
         helper(0)
         return ans
