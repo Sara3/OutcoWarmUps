@@ -68,16 +68,13 @@ var longestStrChain = function(words) {
 /*
 class Solution:
     def longestStrChain(self, words: List[str]) -> int:
-        longestchain = defaultdict(lambda: 1)
-        words = set(words)
-        ans = 1
-        for word in sorted(words, key=lambda e: len(e), reverse=True):
+        longestchain = defaultdict(int)
+        words.sort(key=len, reverse=True)
+        for word in words:
             for i in range(len(word)):
-                word2 = word[:i] + word[i + 1:]
-                if word2 in words:
-                    longestchain[word2] = max(longestchain[word2], 1 + longestchain[word])
-                    ans = max(ans, longestchain[word2])
-        return ans
+                pred = word[:i] + word[i + 1:]
+                longestchain[pred] = max(longestchain[pred], 1 + longestchain[word])
+        return max(longestchain.values())
 */        
         
 
